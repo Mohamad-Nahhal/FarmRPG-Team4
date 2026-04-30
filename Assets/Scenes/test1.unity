@@ -957,6 +957,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a032dd4dbcbcd640a59d44adaca11c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DailyResetSystem
+  _timeSystem: {fileID: 958549948}
   OnDailyReset:
     m_PersistentCalls:
       m_Calls:
