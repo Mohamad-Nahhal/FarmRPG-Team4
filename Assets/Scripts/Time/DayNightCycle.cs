@@ -14,12 +14,11 @@ public class DayNightCycle : MonoBehaviour
     }
 
     private float GetLightIntensity(float t)
-    {
-        // t goes from 0 to 1 representing full day
-        // 6:00 AM = 0.25, Noon = 0.5, 6:00 PM = 0.75, Midnight = 0 or 1
-        if (t < 0.25f) return Mathf.Lerp(0.1f, 1f, t / 0.25f);       // dawn
-        if (t < 0.5f) return 1f;                                        // morning to noon
-        if (t < 0.75f) return Mathf.Lerp(1f, 0.3f, (t - 0.5f) / 0.25f); // afternoon to evening
-        return Mathf.Lerp(0.3f, 0.1f, (t - 0.75f) / 0.25f);           // night
-    }
+{
+    if (t < 0.25f) return Mathf.Lerp(0.1f, 1f, t / 0.25f);                    // dawn
+    if (t < 0.5f) return 1f;                                                    // day
+    if (t < 0.625f) return Mathf.Lerp(1f, 0.5f, (t - 0.5f) / 0.125f);        // evening
+    if (t < 0.75f) return Mathf.Lerp(0.5f, 0.3f, (t - 0.625f) / 0.125f);     // dusk
+    return Mathf.Lerp(0.3f, 0.1f, (t - 0.75f) / 0.25f);                       // night
+}
 }

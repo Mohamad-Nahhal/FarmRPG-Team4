@@ -29,8 +29,7 @@ public class SaveSystem : MonoBehaviour
         data.hour = _timeSystem.Hour;
         data.minute = _timeSystem.Minute;
         data.season = _timeSystem.CurrentSeason.ToString();
-        data.gold = 0; // will connect to friend's PlayerEconomy later
-
+        //data.gold = PlayerEconomy.Instance.currentGold; 
         string json = JsonUtility.ToJson(data, true);
         File.WriteAllText(_savePath, json);
         Debug.Log("Game saved to: " + _savePath);
@@ -49,5 +48,6 @@ public class SaveSystem : MonoBehaviour
 
         _timeSystem.SetTime(data.day, data.hour, data.minute);
         Debug.Log("Game loaded! Day: " + data.day + " | Season: " + data.season);
+        //PlayerEconomy.Instance.currentGold = data.gold;
     }
 }
