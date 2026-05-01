@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   ItemId: tool_sickle
   ItemName: Sickle
-  Icon: {fileID: -3753825769889500098, guid: 64c81fce7857f8b438d6c954d51c0a85, type: 3}
+  Icon: {fileID: -4024342649162953837, guid: a15f58c43ec3aa349aa620fcdfcdae2c, type: 3}
   MaxStack: 1
