@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 28
-  productGUID: c8c7fefceab819740819d1b4bd441ee4
+  productGUID: a16ae5682efb21d449f0b59cae54e27f
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: FarmRPG
+  productName: Game dev project
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -604,14 +604,14 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: FarmRPG
+  metroPackageName: Game dev project
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: FarmRPG
+  metroApplicationDescription: Game dev project
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -680,13 +680,13 @@ PlayerSettings:
   qnxGraphicConfPath: 
   apiCompatibilityLevel: 6
   captureStartupLogs: {}
-  activeInputHandler: 2
+  activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: 6ac309be-d8e8-4fef-80b2-f13352c57a87
+  cloudProjectId: d19d81a0-ef3c-4f94-8610-8c88e43915e3
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: FarmRPG
-  organizationId: ryanboukhouzam
+  projectName: Game dev project
+  organizationId: mohamadnahhal111
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
