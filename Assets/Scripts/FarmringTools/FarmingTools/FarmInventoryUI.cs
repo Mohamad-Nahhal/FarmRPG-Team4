@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InventoryUI : MonoBehaviour
+public class FarmInventoryUI : MonoBehaviour
 {
     [SerializeField] private InventorySystem _inventorySystem;
     [SerializeField] private GameObject _inventoryPanel;
