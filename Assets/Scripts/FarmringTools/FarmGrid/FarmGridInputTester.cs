@@ -66,7 +66,7 @@ public class FarmGridInputTester : MonoBehaviour
             return;
         }
 
-        ItemData selectedItem = _inventorySystem.SelectedHotbarItem;
+        FarmItemData selectedItem = _inventorySystem.SelectedHotbarItem;
 
         if (selectedItem == null)
         {
@@ -132,7 +132,7 @@ public class FarmGridInputTester : MonoBehaviour
         return _farmGridManager.TryWorldToCell(worldPosition, out coordinates);
     }
 
-    private static bool TryGetToolType(ItemData item, out FarmToolType toolType)
+    private static bool TryGetToolType(FarmItemData item, out FarmToolType toolType)
     {
         toolType = default;
 
@@ -175,7 +175,7 @@ public class FarmGridInputTester : MonoBehaviour
         Debug.Log($"{_notEnoughStaminaMessage} Required: {requiredStamina}, Current: {_staminaSystem.CurrentStamina}.");
     }
 
-    private static bool TryGetCropType(ItemData item, out FarmCropType cropType)
+    private static bool TryGetCropType(FarmItemData item, out FarmCropType cropType)
     {
         cropType = FarmCropType.None;
 
