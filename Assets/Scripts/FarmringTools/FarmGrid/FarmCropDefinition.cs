@@ -6,7 +6,7 @@ public class FarmCropDefinition
     private const int LegacyMaxGrowthStage = 4;
 
     public FarmCropType CropType;
-    public ItemData HarvestItem;
+    public FarmItemData HarvestItem;
     [Min(1)] public int DaysPerGrowthStage = 1;
     public Sprite[] StageSprites;
 

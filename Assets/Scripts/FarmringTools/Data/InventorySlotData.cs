@@ -1,6 +1,6 @@
 [System.Serializable]
 public class InventorySlotData
 {
-    public ItemData Item;
+    public FarmItemData Item;
     public int Quantity;
 }

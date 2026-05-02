@@ -20,8 +20,8 @@ public class InventorySlotUI : MonoBehaviour,
     [SerializeField] private Color _hoverColor = new Color(0.75f, 0.75f, 0.75f, 1f);
     [SerializeField] private Color _selectedColor = new Color(0.93f, 0.82f, 0.42f, 1f);
 
-    private InventoryUI _inventoryUi;
-    private ItemData _item;
+    private FarmInventoryUI _inventoryUi;
+    private FarmItemData _item;
     private int _quantity;
     private int _slotIndex;
     private bool _isDragging;
@@ -46,7 +46,7 @@ public class InventorySlotUI : MonoBehaviour,
         ApplyCurrentBackgroundColor();
     }
 
-    public void Setup(InventoryUI inventoryUi, int slotIndex)
+    public void Setup(FarmInventoryUI inventoryUi, int slotIndex)
     {
         _inventoryUi = inventoryUi;
         _slotIndex = slotIndex;
@@ -61,7 +61,7 @@ public class InventorySlotUI : MonoBehaviour,
         ApplyCurrentBackgroundColor();
     }
 
-    public void SetSlot(ItemData item, int quantity)
+    public void SetSlot(FarmItemData item, int quantity)
     {
         _item = item;
         _quantity = quantity;

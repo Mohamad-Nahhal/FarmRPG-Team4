@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: beb265b0a26009246a8a9b80697664c5, type: 3}
   m_Name: Hoe_Item
-  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  m_EditorClassIdentifier: Assembly-CSharp::FarmItemData
   ItemId: tool_hoe
   ItemName: Hoe
   Icon: {fileID: 3711630249063049710, guid: 193232d92eb603c43b1e7bbf9832ecce, type: 3}

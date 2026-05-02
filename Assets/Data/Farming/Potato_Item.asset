@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: beb265b0a26009246a8a9b80697664c5, type: 3}
   m_Name: Potato_Item
-  m_EditorClassIdentifier: Assembly-CSharp::ItemData
+  m_EditorClassIdentifier: Assembly-CSharp::FarmItemData
   ItemId: crop_potato
   ItemName: Potato
   Icon: {fileID: -8837905132163604103, guid: 947f3d3ff37936a46b429729c843cbcd, type: 3}

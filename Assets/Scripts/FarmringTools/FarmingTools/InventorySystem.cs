@@ -6,7 +6,7 @@ public class InventorySystem : MonoBehaviour
 {
     [SerializeField] private int _hotbarSize = 8;
     [SerializeField] private int _inventorySize = 20;
-    [SerializeField] private ItemData[] _startingHotbarItems;
+    [SerializeField] private FarmItemData[] _startingHotbarItems;
     [SerializeField] private int[] _startingHotbarQuantities;
     [SerializeField] private int _selectedHotbarSlotIndex;
 
@@ -22,7 +22,7 @@ public class InventorySystem : MonoBehaviour
     public int InventoryStartIndex => HotbarSize;
     public int TotalSlotCount => HotbarSize + InventorySize;
     public int SelectedHotbarSlotIndex => Mathf.Clamp(_selectedHotbarSlotIndex, 0, HotbarSize - 1);
-    public ItemData SelectedHotbarItem => TryGetSelectedHotbarItem(out ItemData item) ? item : null;
+    public FarmItemData SelectedHotbarItem => TryGetSelectedHotbarItem(out FarmItemData item) ? item : null;
     public IReadOnlyList<InventorySlotData> Slots => _slots;
 
     private void Awake()
@@ -48,7 +48,7 @@ public class InventorySystem : MonoBehaviour
         return _slots[slotIndex];
     }
 
-    public bool AddItem(ItemData item, int amount)
+    public bool AddItem(FarmItemData item, int amount)
     {
         if (!IsValidItemRequest(item, amount))
         {
@@ -71,7 +71,7 @@ public class InventorySystem : MonoBehaviour
         return amountRemaining == 0;
     }
 
-    public bool RemoveItem(ItemData item, int amount)
+    public bool RemoveItem(FarmItemData item, int amount)
     {
         if (!IsValidItemRequest(item, amount))
         {
@@ -90,7 +90,7 @@ public class InventorySystem : MonoBehaviour
         return amountRemaining == 0;
     }
 
-    public bool TryAddToSlot(int slotIndex, ItemData item, int amount, out int amountRemaining)
+    public bool TryAddToSlot(int slotIndex, FarmItemData item, int amount, out int amountRemaining)
     {
         amountRemaining = amount;
 
@@ -181,7 +181,7 @@ public class InventorySystem : MonoBehaviour
             return true;
         }
 
-        ItemData cachedItem = toSlot.Item;
+        FarmItemData cachedItem = toSlot.Item;
         int cachedQuantity = toSlot.Quantity;
 
         toSlot.Item = fromSlot.Item;
@@ -198,7 +198,7 @@ public class InventorySystem : MonoBehaviour
         return SelectHotbarSlot(slotIndex, false);
     }
 
-    public bool TryGetSelectedHotbarItem(out ItemData item)
+    public bool TryGetSelectedHotbarItem(out FarmItemData item)
     {
         item = null;
 
@@ -272,7 +272,7 @@ public class InventorySystem : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            ItemData item = _startingHotbarItems[i];
+            FarmItemData item = _startingHotbarItems[i];
 
             if (item == null)
             {
@@ -286,7 +286,7 @@ public class InventorySystem : MonoBehaviour
         }
     }
 
-    private int GetStartingQuantity(int slotIndex, ItemData item)
+    private int GetStartingQuantity(int slotIndex, FarmItemData item)
     {
         int configuredQuantity = GetConfiguredStartingHotbarQuantity(slotIndex);
         return Mathf.Clamp(configuredQuantity, 1, Mathf.Max(1, item.MaxStack));
@@ -301,7 +301,7 @@ public class InventorySystem : MonoBehaviour
 
         for (int i = 0; i < itemCount; i++)
         {
-            ItemData item = _startingHotbarItems[i];
+            FarmItemData item = _startingHotbarItems[i];
             string itemId = item != null ? item.ItemId : "null";
             int configuredQuantity = GetConfiguredStartingHotbarQuantity(i);
             Debug.Log($"Configured starting hotbar item -> HotbarIndex: {i}, ItemId: {itemId}, Quantity: {configuredQuantity}");
@@ -356,7 +356,7 @@ public class InventorySystem : MonoBehaviour
     }
 
 
-    private int AddToRange(ItemData item, int amount, int startIndex, int endIndex)
+    private int AddToRange(FarmItemData item, int amount, int startIndex, int endIndex)
     {
         for (int i = startIndex; i < endIndex; i++)
         {
@@ -400,7 +400,7 @@ public class InventorySystem : MonoBehaviour
         return amount;
     }
 
-    private int RemoveFromRange(ItemData item, int amount, int startIndex, int endIndex)
+    private int RemoveFromRange(FarmItemData item, int amount, int startIndex, int endIndex)
     {
         for (int i = startIndex; i < endIndex; i++)
         {
@@ -451,7 +451,7 @@ public class InventorySystem : MonoBehaviour
         return _slots != null && slotIndex >= 0 && slotIndex < _slots.Count;
     }
 
-    private static bool IsValidItemRequest(ItemData item, int amount)
+    private static bool IsValidItemRequest(FarmItemData item, int amount)
     {
         return item != null && amount > 0;
     }

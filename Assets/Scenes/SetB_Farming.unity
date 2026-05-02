@@ -548,7 +548,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 060929af4f81ccc458ab18f7183e796c, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InventoryUI
+  m_EditorClassIdentifier: Assembly-CSharp::FarmInventoryUI
   _inventorySystem: {fileID: 900000202}
   _inventoryPanel: {fileID: 0}
   _inventorySlotsContainer: {fileID: 0}
