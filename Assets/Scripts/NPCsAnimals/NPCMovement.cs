@@ -9,11 +9,11 @@ public class NPCMovement : MonoBehaviour
     [SerializeField] private Vector2 _offset;
 
     private Transform _targetLocation;
-    private TimeManager _timeManager;
+    private NPCTimeManager _timeManager;
 
     private void Start()
     {
-        _timeManager = FindFirstObjectByType<TimeManager>();
+        _timeManager = FindFirstObjectByType<NPCTimeManager>();
         UpdateTargetLocation();
     }
 

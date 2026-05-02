@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-public class TimeManager : MonoBehaviour
+public class NPCTimeManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text _dayText;
     [SerializeField] private TMP_Text _hourText;
