@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [Header("References")]
     [SerializeField] private GridManager gridManager;
     [SerializeField] private GameObject tileHighlight;
+     [SerializeField] private GameObject UI_PlayerInv;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -44,6 +45,10 @@ public class PlayerController : MonoBehaviour
         HandleFlip();
         UpdateGridPosition();
         HandleHighlight();
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            UI_PlayerInv.SetActive(!UI_PlayerInv.activeSelf);
+        }
 
         if (Input.GetKeyDown(KeyCode.E))
         {

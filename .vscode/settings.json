@@ -67,6 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "FarmRPG-Team4.slnx",
+    "dotnet.defaultSolution": "FarmRPG.slnx",
     "git.ignoreLimitWarning": true
 }
