@@ -57,7 +57,7 @@ public class GridManager : MonoBehaviour
             {
                 tile.DoorID = "DoorHouse2";
                 tile.TargetScene = "01_Farm.scene";
-                tile.SpawnPosition = new Vector2(71, 0);
+                tile.SpawnPosition = new Vector2(116, 0);
             }
 
              if (unityTile.name.Contains("DoorExit2"))

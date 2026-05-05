@@ -489,4 +489,23 @@ public class FarmGridManager : MonoBehaviour
         0f
     );
 }
+
+public void GrowAllCrops()
+{
+    for (int x = 0; x < _width; x++)
+    {
+        for (int y = 0; y < _height; y++)
+        {
+            FarmGridCellData cell = _cells[x, y];
+            Vector2Int coordinates = new Vector2Int(x, y);
+
+            if (cell.CropType != FarmCropType.None && 
+                cell.GrowthStage < GetMaxGrowthStage(cell.CropType) && cell.State == FarmTileState.WateredSoil)
+            {
+                cell.GrowthStage++;
+                RefreshCropVisual(coordinates);
+            }
+        }
+    }
+}
 }

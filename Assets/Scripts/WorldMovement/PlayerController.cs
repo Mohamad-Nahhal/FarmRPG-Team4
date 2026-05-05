@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         originalScale = transform.localScale;
-        PlayerPrefs.DeleteKey("spawnX");
-        PlayerPrefs.DeleteKey("spawnY");
+        //PlayerPrefs.DeleteKey("spawnX");
+        //PlayerPrefs.DeleteKey("spawnY");
     }
     private void Start()
     {
@@ -45,11 +45,7 @@ public class PlayerController : MonoBehaviour
         HandleFlip();
         UpdateGridPosition();
         HandleHighlight();
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            UI_PlayerInv.SetActive(!UI_PlayerInv.activeSelf);
-        }
-
+        
         if (Input.GetKeyDown(KeyCode.E))
         {
             TryInteract();
