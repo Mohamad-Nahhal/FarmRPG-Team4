@@ -1,12 +1,12 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class FarmGridInputTester : MonoBehaviour
 {
     [SerializeField] private FarmGridManager _farmGridManager;
     [SerializeField] private InventorySystem _inventorySystem;
     [SerializeField] private StaminaSystem _staminaSystem;
-    [SerializeField] private Camera _worldCamera;
+    [SerializeField] private PlayerController _playerController;
+    [SerializeField] private KeyCode _farmActionKey = KeyCode.E;
     [SerializeField] private KeyCode _advanceDayKey = KeyCode.N;
 
     [Header("Stamina Costs")]
@@ -33,16 +33,17 @@ public class FarmGridInputTester : MonoBehaviour
             _staminaSystem = GetComponent<StaminaSystem>();
         }
 
-        if (_worldCamera == null)
+        if (_playerController == null)
         {
-            _worldCamera = Camera.main;
+            _playerController = UnityEngine.Object.FindAnyObjectByType<PlayerController>();
         }
     }
 
     private void Update()
     {
-        if (_farmGridManager == null || _inventorySystem == null || _staminaSystem == null || _worldCamera == null)
+        if (_farmGridManager == null || _inventorySystem == null || _staminaSystem == null || _playerController == null)
         {
+            Debug.Log($"FarmGridInputTester missing dependency. Grid: {_farmGridManager != null}, Inventory: {_inventorySystem != null}, Stamina: {_staminaSystem != null}, Player: {_playerController != null}");
             return;
         }
 
@@ -51,22 +52,19 @@ public class FarmGridInputTester : MonoBehaviour
             SleepUntilNextDay();
         }
 
-        if (!Input.GetMouseButtonDown(0))
+        if (!Input.GetKeyDown(_farmActionKey))
         {
             return;
         }
 
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
+        if (!TryGetFacingFarmCell(out Vector2Int coordinates))
         {
-            return;
-        }
-
-        if (!TryGetCellUnderMouse(out Vector2Int coordinates))
-        {
+            Debug.Log("Farm action ignored because the highlighted player tile is outside farm grid bounds.");
             return;
         }
 
         FarmItemData selectedItem = _inventorySystem.SelectedHotbarItem;
+        Debug.Log($"Farm action on cell {coordinates}. Selected item: {(selectedItem != null ? selectedItem.ItemId : "none")}");
 
         if (selectedItem == null)
         {
@@ -95,7 +93,10 @@ public class FarmGridInputTester : MonoBehaviour
             return;
         }
 
-        if (_farmGridManager.TryApplyTool(coordinates, toolType))
+        bool applied = _farmGridManager.TryApplyTool(coordinates, toolType);
+        Debug.Log($"Farm tool action. Tool: {toolType}, Cell: {coordinates}, Applied: {applied}");
+
+        if (applied)
         {
             _staminaSystem.TrySpend(staminaCost);
         }
@@ -109,7 +110,10 @@ public class FarmGridInputTester : MonoBehaviour
             return;
         }
 
-        if (_farmGridManager.TryPlantCrop(coordinates, cropType))
+        bool planted = _farmGridManager.TryPlantCrop(coordinates, cropType);
+        Debug.Log($"Farm plant action. Crop: {cropType}, Cell: {coordinates}, Planted: {planted}");
+
+        if (planted)
         {
             if (_inventorySystem.TryConsumeSelectedHotbarItem(1))
             {
@@ -124,12 +128,10 @@ public class FarmGridInputTester : MonoBehaviour
         _staminaSystem.RestoreToMax();
     }
 
-    private bool TryGetCellUnderMouse(out Vector2Int coordinates)
+    private bool TryGetFacingFarmCell(out Vector2Int coordinates)
     {
-        Vector3 mousePosition = Input.mousePosition;
-        Vector3 worldPosition = _worldCamera.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Mathf.Abs(_worldCamera.transform.position.z)));
-        worldPosition.z = 0f;
-        return _farmGridManager.TryWorldToCell(worldPosition, out coordinates);
+        Vector3 targetWorldPosition = _playerController.GetFacingWorldCenterPosition();
+        return _farmGridManager.TryWorldToCell(targetWorldPosition, out coordinates);
     }
 
     private static bool TryGetToolType(FarmItemData item, out FarmToolType toolType)

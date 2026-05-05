@@ -13,6 +13,8 @@ public class FarmGridManager : MonoBehaviour
     [SerializeField] private Color _tilledSoilColor = new Color(0.36f, 0.24f, 0.14f, 1f);
     [SerializeField] private Color _wateredSoilColor = new Color(0.24f, 0.39f, 0.54f, 1f);
     [SerializeField] private float _cropSpriteScale = 0.45f;
+    [SerializeField] private int _cellSortingOrder = 1;
+    [SerializeField] private int _cropSortingOrder = 4;
     [SerializeField] private int _maxGrowthStage = 4;
     [SerializeField] private FarmCropDefinition[] _cropDefinitions;
 
@@ -42,6 +44,31 @@ public class FarmGridManager : MonoBehaviour
 
         BuildGrid();
         
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (_width <= 0 || _height <= 0 || _cellSize <= 0f)
+        {
+            return;
+        }
+
+        Vector2 bottomLeft = GetBottomLeftWorldPosition();
+        Gizmos.color = new Color(_normalSoilColor.r, _normalSoilColor.g, _normalSoilColor.b, 0.35f);
+
+        for (int x = 0; x < _width; x++)
+        {
+            for (int y = 0; y < _height; y++)
+            {
+                Vector3 center = new Vector3(
+                    bottomLeft.x + ((x + 0.5f) * _cellSize),
+                    bottomLeft.y + ((y + 0.5f) * _cellSize),
+                    transform.position.z);
+
+                Vector3 size = new Vector3(_cellSize - _cellPadding, _cellSize - _cellPadding, 0f);
+                Gizmos.DrawWireCube(center, size);
+            }
+        }
     }
     
 
@@ -263,6 +290,8 @@ public class FarmGridManager : MonoBehaviour
                 RefreshCellVisual(coordinates);
             }
         }
+
+        Debug.Log($"FarmGridManager built grid '{name}' with {_width}x{_height} cells at {transform.position}. Visual root child count: {_visualRoot.childCount}");
     }
 
     private void CreateCellVisual(Vector2Int coordinates)
@@ -275,7 +304,7 @@ public class FarmGridManager : MonoBehaviour
 
     SpriteRenderer cellRenderer = cellObject.AddComponent<SpriteRenderer>();
     cellRenderer.sprite = GetCellSprite();
-    cellRenderer.sortingOrder = 0;
+    cellRenderer.sortingOrder = _cellSortingOrder;
     _cellRenderers[coordinates.x, coordinates.y] = cellRenderer;
 
     GameObject cropObject = new GameObject($"Crop_{coordinates.x}_{coordinates.y}");
@@ -283,7 +312,7 @@ public class FarmGridManager : MonoBehaviour
     cropObject.transform.localPosition = Vector3.zero;
 
     SpriteRenderer cropRenderer = cropObject.AddComponent<SpriteRenderer>();
-    cropRenderer.sortingOrder = 1;
+    cropRenderer.sortingOrder = _cropSortingOrder;
     cropRenderer.enabled = false;
     _cropRenderers[coordinates.x, coordinates.y] = cropRenderer;
 }

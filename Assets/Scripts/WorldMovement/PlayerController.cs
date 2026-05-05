@@ -124,6 +124,15 @@ public class PlayerController : MonoBehaviour
         return gridManager.GetGridPosition(targetWorldPos);
     }
 
+    public Vector3 GetFacingWorldCenterPosition()
+    {
+        Vector2Int targetGrid = GetFacingGridPosition();
+        Vector3 worldPos = gridManager.GetWorldPosition(targetGrid);
+        worldPos.x += 0.5f;
+        worldPos.y += 0.5f;
+        return worldPos;
+    }
+
     private void HandleHighlight()
     {
         if (tileHighlight == null || gridManager == null) return;
@@ -133,15 +142,7 @@ public class PlayerController : MonoBehaviour
 
         if (!isMoving)
         {
-            Vector2Int targetGrid = GetFacingGridPosition();
-
-            Vector3 worldPos = gridManager.GetWorldPosition(targetGrid);
-
-        
-            worldPos.x += 0.5f;
-            worldPos.y += 0.5f;
-
-            tileHighlight.transform.position = worldPos;
+            tileHighlight.transform.position = GetFacingWorldCenterPosition();
         }
     }
 
