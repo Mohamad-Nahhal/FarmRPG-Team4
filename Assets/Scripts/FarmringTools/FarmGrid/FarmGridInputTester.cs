@@ -123,10 +123,15 @@ public class FarmGridInputTester : MonoBehaviour
     }
 
     public void SleepUntilNextDay()
+{
+    _farmGridManager.AdvanceDay();
+    _staminaSystem.RestoreToMax();
+    TimeSystem timeSystem = UnityEngine.Object.FindAnyObjectByType<TimeSystem>();
+    if (timeSystem != null)
     {
-        _farmGridManager.AdvanceDay();
-        _staminaSystem.RestoreToMax();
+        timeSystem.SetTime(timeSystem.Day + 1, 6, 0);
     }
+}
 
     private bool TryGetFacingFarmCell(out Vector2Int coordinates)
     {
