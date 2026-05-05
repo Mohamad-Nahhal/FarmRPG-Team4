@@ -34,13 +34,16 @@ public class FarmGridManager : MonoBehaviour
 
     private void Awake()
     {
+        
         if (_inventorySystem == null)
         {
             _inventorySystem = UnityEngine.Object.FindAnyObjectByType<InventorySystem>();
         }
 
         BuildGrid();
+        
     }
+    
 
     public bool TryGetCell(Vector2Int coordinates, out FarmGridCellData cell)
     {
@@ -263,26 +266,27 @@ public class FarmGridManager : MonoBehaviour
     }
 
     private void CreateCellVisual(Vector2Int coordinates)
-    {
-        GameObject cellObject = new GameObject($"Cell_{coordinates.x}_{coordinates.y}");
-        cellObject.transform.SetParent(_visualRoot, false);
-        cellObject.transform.position = GetCellCenterWorldPosition(coordinates);
-        cellObject.transform.localScale = Vector3.one * Mathf.Max(0.01f, _cellSize - _cellPadding);
+{
+    GameObject cellObject = new GameObject($"Cell_{coordinates.x}_{coordinates.y}");
+    cellObject.transform.SetParent(_visualRoot, false);
 
-        SpriteRenderer cellRenderer = cellObject.AddComponent<SpriteRenderer>();
-        cellRenderer.sprite = GetCellSprite();
-        cellRenderer.sortingOrder = 0;
-        _cellRenderers[coordinates.x, coordinates.y] = cellRenderer;
+    cellObject.transform.localPosition = GetCellCenterLocalPosition(coordinates);
+    cellObject.transform.localScale = Vector3.one * Mathf.Max(0.01f, _cellSize - _cellPadding);
 
-        GameObject cropObject = new GameObject($"Crop_{coordinates.x}_{coordinates.y}");
-        cropObject.transform.SetParent(cellObject.transform, false);
-        cropObject.transform.localPosition = Vector3.zero;
+    SpriteRenderer cellRenderer = cellObject.AddComponent<SpriteRenderer>();
+    cellRenderer.sprite = GetCellSprite();
+    cellRenderer.sortingOrder = 0;
+    _cellRenderers[coordinates.x, coordinates.y] = cellRenderer;
 
-        SpriteRenderer cropRenderer = cropObject.AddComponent<SpriteRenderer>();
-        cropRenderer.sortingOrder = 1;
-        cropRenderer.enabled = false;
-        _cropRenderers[coordinates.x, coordinates.y] = cropRenderer;
-    }
+    GameObject cropObject = new GameObject($"Crop_{coordinates.x}_{coordinates.y}");
+    cropObject.transform.SetParent(cellObject.transform, false);
+    cropObject.transform.localPosition = Vector3.zero;
+
+    SpriteRenderer cropRenderer = cropObject.AddComponent<SpriteRenderer>();
+    cropRenderer.sortingOrder = 1;
+    cropRenderer.enabled = false;
+    _cropRenderers[coordinates.x, coordinates.y] = cropRenderer;
+}
 
     private void RefreshCellVisual(Vector2Int coordinates)
     {
@@ -445,4 +449,15 @@ public class FarmGridManager : MonoBehaviour
             _ => Color.white
         };
     }
+    private Vector3 GetCellCenterLocalPosition(Vector2Int coordinates)
+{
+    float left = -_width * _cellSize * 0.5f;
+    float bottom = -_height * _cellSize * 0.5f;
+
+    return new Vector3(
+        left + ((coordinates.x + 0.5f) * _cellSize),
+        bottom + ((coordinates.y + 0.5f) * _cellSize),
+        0f
+    );
+}
 }

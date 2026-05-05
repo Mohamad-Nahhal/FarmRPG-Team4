@@ -42,8 +42,8 @@ public class GridManager : MonoBehaviour
             if (unityTile.name.Contains("DoorHouse1"))
             {
                 tile.DoorID = "DoorHouse1";
-                tile.TargetScene = "building1";
-                tile.SpawnPosition = new Vector2(0, 0);
+                tile.TargetScene = "01_Farm.scene";
+                tile.SpawnPosition = new Vector2(71, 0);
             }
 
             if (unityTile.name.Contains("DoorExit1"))
@@ -56,8 +56,8 @@ public class GridManager : MonoBehaviour
              if (unityTile.name.Contains("DoorHouse2"))
             {
                 tile.DoorID = "DoorHouse2";
-                tile.TargetScene = "building1";
-                tile.SpawnPosition = new Vector2(47, 0);
+                tile.TargetScene = "01_Farm.scene";
+                tile.SpawnPosition = new Vector2(71, 0);
             }
 
              if (unityTile.name.Contains("DoorExit2"))

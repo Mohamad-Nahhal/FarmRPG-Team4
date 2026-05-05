@@ -23,8 +23,8 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         originalScale = transform.localScale;
-        //PlayerPrefs.DeleteKey("spawnX");
-        //PlayerPrefs.DeleteKey("spawnY");
+        PlayerPrefs.DeleteKey("spawnX");
+        PlayerPrefs.DeleteKey("spawnY");
     }
     private void Start()
     {
