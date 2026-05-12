@@ -5,10 +5,12 @@ public class NPCTimeManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text _dayText;
     [SerializeField] private TMP_Text _hourText;
+    public AnimalProductionManager animalProductionManager;
 
     private int _currentDay = 1;
     [SerializeField] private int _currentHour = 8;
     public int CurrentHour => _currentHour;
+
 
     private void Start()
     {
@@ -29,8 +31,12 @@ public class NPCTimeManager : MonoBehaviour
 
     public void AdvanceDay()
     {
+
         _currentDay++;
         UpdateUI();
+        if (animalProductionManager != null)
+        animalProductionManager.ProduceItemsForNewDay();
+        Debug.Log(animalProductionManager);
     }
 
     private void UpdateUI()
