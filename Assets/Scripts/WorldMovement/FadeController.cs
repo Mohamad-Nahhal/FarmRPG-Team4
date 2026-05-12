@@ -20,7 +20,7 @@ public class ScreenFader : MonoBehaviour
     }
 
     Instance = this;
-    DontDestroyOnLoad(gameObject);
+    
 }
 
     public IEnumerator FadeOut()
