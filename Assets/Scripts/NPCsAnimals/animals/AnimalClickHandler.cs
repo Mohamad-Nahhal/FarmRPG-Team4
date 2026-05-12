@@ -11,10 +11,16 @@ public class AnimalClickHandler : MonoBehaviour
     }
 
     private void OnMouseDown()
-    {
-        if (_animalData != null && _animalInfoUI != null)
-        {
-            _animalInfoUI.ShowAnimalInfo(_animalData);
-        }
-    }
+{
+    Debug.Log("Chicken clicked");
+
+    if (_animalData == null)
+        Debug.LogError("AnimalData is missing on chicken");
+
+    if (_animalInfoUI == null)
+        Debug.LogError("AnimalInfoUI is not assigned");
+
+    if (_animalData != null && _animalInfoUI != null)
+        _animalInfoUI.ShowAnimalInfo(_animalData);
 }
+} 
