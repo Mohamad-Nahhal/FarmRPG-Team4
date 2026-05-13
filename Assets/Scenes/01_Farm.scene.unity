@@ -128515,9 +128515,9 @@ MonoBehaviour:
   _height: 5
   _cellSize: 1
   _cellPadding: 0.08
-  _normalSoilColor: {r: 0.47, g: 0.33, b: 0.21, a: 1}
-  _tilledSoilColor: {r: 0.36, g: 0.24, b: 0.14, a: 1}
-  _wateredSoilColor: {r: 0.24, g: 0.39, b: 0.54, a: 1}
+  _normalSoilColor: {r: 0.47, g: 0.33, b: 0.21, a: 0.6666667}
+  _tilledSoilColor: {r: 0.36, g: 0.24, b: 0.14, a: 0.77254903}
+  _wateredSoilColor: {r: 0.24, g: 0.39, b: 0.54, a: 0.7882353}
   _cropSpriteScale: 0.45
   _cellSortingOrder: 1
   _cropSortingOrder: 4
