@@ -175,14 +175,14 @@ private void TeleportTo(Vector2 position)
 
     if (tile.Type == TileType.Stamina)
     {
-        StaminaSystem stamina = FindFirstObjectByType<StaminaSystem>();
+        StaminaSystem stamina = FindAnyObjectByType<StaminaSystem>();
 
         if (stamina != null)
         {
             stamina.RestoreToMax();
             Debug.Log("Stamina restored!");
         }
-         TimeSystem timeSystem = FindFirstObjectByType<TimeSystem>();
+         TimeSystem timeSystem = FindAnyObjectByType<TimeSystem>();
 
     if (timeSystem != null)
     {
@@ -195,7 +195,7 @@ private void TeleportTo(Vector2 position)
 }
     if (tile.Type == TileType.Shop)
     {
-        FarmShopUI shop = FindFirstObjectByType<FarmShopUI>();
+        FarmShopUI shop = FindAnyObjectByType<FarmShopUI>();
 
         if (shop != null)
         {

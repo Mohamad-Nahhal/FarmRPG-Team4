@@ -9,11 +9,11 @@ public class NPCMovement : MonoBehaviour
     [SerializeField] private Vector2 _offset;
 
     private Transform _targetLocation;
-    private NPCTimeManager _timeManager;
+    private TimeSystem _timeManager;
 
     private void Start()
     {
-        _timeManager = FindFirstObjectByType<NPCTimeManager>();
+        _timeManager = FindAnyObjectByType<TimeSystem>();
         UpdateTargetLocation();
     }
 
@@ -27,7 +27,7 @@ public class NPCMovement : MonoBehaviour
     {
         if (_timeManager == null) return;
 
-        int hour = _timeManager.CurrentHour;
+        int hour = _timeManager.Hour;
 
         if (hour < 10)
             _targetLocation = _morningLocation;

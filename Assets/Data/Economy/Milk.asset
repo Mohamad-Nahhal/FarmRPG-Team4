@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88b72e23d942e4f9d9628e6c9162c45a, type: 3}
+  m_Script: {fileID: 11500000, guid: beb265b0a26009246a8a9b80697664c5, type: 3}
   m_Name: Milk
-  m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: Milk
-  icon: {fileID: -5110731548806032159, guid: dc49f294d38f346a5877398f5f28fc6c, type: 3}
-  buyPrice: 30
-  sellPrice: 15
-  canBeSold: 1
+  m_EditorClassIdentifier: Assembly-CSharp::FarmItemData
+  ItemId: 
+  ItemName: 
+  Icon: {fileID: 0}
+  MaxStack: 99

@@ -6,6 +6,11 @@ public class AnimalProductionManager : MonoBehaviour
     [SerializeField] private AnimalData[] _animals;
     [SerializeField] private GameObject _collectionPanel;
     [SerializeField] private TextMeshProUGUI _collectionText;
+    [SerializeField] private InventorySystem _inventorySystem;
+
+[SerializeField] private FarmItemData eggItem;
+[SerializeField] private FarmItemData milkItem;
+[SerializeField] private FarmItemData woolItem;
 
     private int _eggs = 0;
     private int _milk = 0;
@@ -32,14 +37,19 @@ public class AnimalProductionManager : MonoBehaviour
             switch (item)
             {
                 case "Egg":
-                    _eggs++;
-                    break;
-                case "Milk":
-                    _milk++;
-                    break;
-                case "Wool":
-                    _wool++;
-                    break;
+    _eggs++;
+    _inventorySystem.AddItem(eggItem, 1);
+    break;
+
+case "Milk":
+    _milk++;
+    _inventorySystem.AddItem(milkItem, 1);
+    break;
+
+case "Wool":
+    _wool++;
+    _inventorySystem.AddItem(woolItem, 1);
+    break;
             }
         }
 
@@ -48,11 +58,10 @@ public class AnimalProductionManager : MonoBehaviour
 
     UpdateCollectionUI();
 }
-
     public void OpenCollectionPanel()
     {
-        if (_collectionPanel != null)
-            _collectionPanel.SetActive(true);
+        Debug.Log("OPEN METHOD CALLED");
+    _collectionPanel.SetActive(true);
     }
 
     public void CloseCollectionPanel()

@@ -5,6 +5,7 @@ public class NPCTimeManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text _dayText;
     [SerializeField] private TMP_Text _hourText;
+    [SerializeField] private AnimalProductionManager animalProductionManager;
 
     private int _currentDay = 1;
     [SerializeField] private int _currentHour = 8;
@@ -31,6 +32,8 @@ public class NPCTimeManager : MonoBehaviour
     {
         _currentDay++;
         UpdateUI();
+        if (animalProductionManager != null)
+        animalProductionManager.ProduceItemsForNewDay();
     }
 
     private void UpdateUI()

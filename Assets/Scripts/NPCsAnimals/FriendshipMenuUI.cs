@@ -10,6 +10,11 @@ public class FriendshipMenuUI : MonoBehaviour
     public TextMeshProUGUI farmerText;
     public TextMeshProUGUI shopkeeperText;
     public TextMeshProUGUI villagerText;
+    public void TogglePanel()
+{
+    if (panel != null)
+        panel.SetActive(!panel.activeSelf);
+}
 
     public GameObject panel;
 

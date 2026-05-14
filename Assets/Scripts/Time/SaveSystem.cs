@@ -41,19 +41,19 @@ public class SaveSystem : MonoBehaviour
     _savePath = Application.persistentDataPath + "/savefile.json";
 
     if (_timeSystem == null)
-        _timeSystem = FindFirstObjectByType<TimeSystem>();
+        _timeSystem = FindAnyObjectByType<TimeSystem>();
 
     if (_playerGold == null)
-        _playerGold = FindFirstObjectByType<PlayerGold>();
+        _playerGold = FindAnyObjectByType<PlayerGold>();
 
     if (_staminaSystem == null)
-        _staminaSystem = FindFirstObjectByType<StaminaSystem>();
+        _staminaSystem = FindAnyObjectByType<StaminaSystem>();
 
     if (_inventorySystem == null)
-        _inventorySystem = FindFirstObjectByType<InventorySystem>();
+        _inventorySystem = FindAnyObjectByType<InventorySystem>();
 
     if (_player == null)
-        _player = FindFirstObjectByType<PlayerController>()?.transform;
+        _player = FindAnyObjectByType<PlayerController>()?.transform;
 }
 
     public void Save()
