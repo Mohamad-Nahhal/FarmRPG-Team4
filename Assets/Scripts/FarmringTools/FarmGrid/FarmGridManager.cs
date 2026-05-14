@@ -185,7 +185,7 @@ public class FarmGridManager : MonoBehaviour
             return false;
         }
 
-        if (!_inventorySystem.AddItem(cropDefinition.HarvestItem, 1))
+        if (!_inventorySystem.AddItem(cropDefinition.HarvestItem, 2))
         {
             return false;
         }

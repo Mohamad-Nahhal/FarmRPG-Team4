@@ -96,7 +96,7 @@ public class FarmShopUI : MonoBehaviour
         }
     }
 
-    private void OpenShop()
+    public void OpenShop()
     {
         _isOpen = true;
         _shopPanel.SetActive(true);
@@ -108,7 +108,7 @@ public class FarmShopUI : MonoBehaviour
         RefreshUI();
     }
 
-    private void CloseShop()
+    public void CloseShop()
     {
         _isOpen = false;
         _shopPanel.SetActive(false);

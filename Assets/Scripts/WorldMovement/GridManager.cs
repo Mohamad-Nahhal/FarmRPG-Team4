@@ -42,31 +42,37 @@ public class GridManager : MonoBehaviour
             if (unityTile.name.Contains("DoorHouse1"))
             {
                 tile.DoorID = "DoorHouse1";
-                tile.TargetScene = "01_Farm.scene";
                 tile.SpawnPosition = new Vector2(71, 0);
             }
 
             if (unityTile.name.Contains("DoorExit1"))
             {
                 tile.DoorID = "DoorExit1";
-                tile.TargetScene = "01_Farm.scene";
                 tile.SpawnPosition = new Vector2(-12, -1);
             }
 
              if (unityTile.name.Contains("DoorHouse2"))
             {
                 tile.DoorID = "DoorHouse2";
-                tile.TargetScene = "01_Farm.scene";
                 tile.SpawnPosition = new Vector2(116, 0);
             }
 
              if (unityTile.name.Contains("DoorExit2"))
             {
                 tile.DoorID = "DoorExit2";
-                tile.TargetScene = "01_Farm.scene";
                 tile.SpawnPosition = new Vector2(12, 0);
             }
         }
+        if (unityTile != null && unityTile.name.Contains("Stamina"))
+            {
+                tile.Type = TileType.Stamina;
+                tile.IsInteractable = true;
+            }
+            if (unityTile != null && unityTile.name.Contains("Shop"))
+            {
+                tile.Type = TileType.Shop;
+                tile.IsInteractable = true;
+            }
 
         _tiles[gridPos] = tile;
     }

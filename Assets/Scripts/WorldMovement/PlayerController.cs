@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerController : MonoBehaviour
 {
@@ -28,10 +29,7 @@ public class PlayerController : MonoBehaviour
     }
     private void Start()
     {
-        float x = PlayerPrefs.GetFloat("spawnX", transform.position.x);
-        float y = PlayerPrefs.GetFloat("spawnY", transform.position.y);
-
-        transform.position = new Vector3(x, y, 0);
+        
 
         Debug.Log("Spawned at: " + transform.position);
     }
@@ -141,7 +139,24 @@ public class PlayerController : MonoBehaviour
             tileHighlight.transform.position = GetFacingWorldCenterPosition();
         }
     }
+ 
 
+private IEnumerator TeleportRoutine(Vector2 position)
+{
+    yield return StartCoroutine(ScreenFader.Instance.FadeOut());
+
+    TeleportTo(position);
+
+    yield return new WaitForSecondsRealtime(0.1f);
+
+    yield return StartCoroutine(ScreenFader.Instance.FadeIn());
+}
+
+private void TeleportTo(Vector2 position)
+{
+    rb.linearVelocity = Vector2.zero;
+    transform.position = new Vector3(position.x, position.y, transform.position.z);
+}
     private void TryInteract()
 {
     Vector2Int targetGrid = GetFacingGridPosition();
@@ -158,17 +173,40 @@ public class PlayerController : MonoBehaviour
 
     Debug.Log("Tile found. Type: " + tile.Type);
 
+    if (tile.Type == TileType.Stamina)
+    {
+        StaminaSystem stamina = FindFirstObjectByType<StaminaSystem>();
+
+        if (stamina != null)
+        {
+            stamina.RestoreToMax();
+            Debug.Log("Stamina restored!");
+        }
+
+    return;
+}
+    if (tile.Type == TileType.Shop)
+    {
+        FarmShopUI shop = FindFirstObjectByType<FarmShopUI>();
+
+        if (shop != null)
+        {
+            shop.OpenShop();
+            Debug.Log("Shop opened!");
+        }
+
+        return;
+    }
+
     if (tile.Type == TileType.Door)
     {
         Debug.Log("Door activated!");
 
-        PlayerPrefs.SetString("lastDoorID", tile.DoorID);
-
-        PlayerPrefs.SetFloat("spawnX", tile.SpawnPosition.x);
-        PlayerPrefs.SetFloat("spawnY", tile.SpawnPosition.y);
+       StartCoroutine(TeleportRoutine(tile.SpawnPosition));
 
 
-        SceneLoader.Instance.LoadScene(tile.TargetScene);
+        
     }
+    
 }
 }

@@ -7,7 +7,9 @@ public enum TileType
     Water,
     Path,
     Building,
-    Door
+    Door,
+    Stamina,
+    Shop
 }
 [System.Serializable]
 public class TileData
