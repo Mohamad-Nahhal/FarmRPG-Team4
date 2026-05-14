@@ -47,6 +47,7 @@ public class StaminaSystem : MonoBehaviour
 
     public void RestoreToMax()
     {
+        Debug.Log("STAMINA RESTORED BY: " + Environment.StackTrace);
         if (_currentStamina == _maxStamina)
         {
             return;
@@ -60,4 +61,9 @@ public class StaminaSystem : MonoBehaviour
     {
         StaminaChanged?.Invoke();
     }
+    public void SetStamina(int amount)
+{
+    _currentStamina = Mathf.Clamp(amount, 0, _maxStamina);
+    NotifyStaminaChanged();
+}
 }

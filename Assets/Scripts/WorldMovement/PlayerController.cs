@@ -182,6 +182,14 @@ private void TeleportTo(Vector2 position)
             stamina.RestoreToMax();
             Debug.Log("Stamina restored!");
         }
+         TimeSystem timeSystem = FindFirstObjectByType<TimeSystem>();
+
+    if (timeSystem != null)
+    {
+        timeSystem.SleepToNextDay();
+    }
+
+    Debug.Log("Slept. Stamina restored and day advanced.");
 
     return;
 }

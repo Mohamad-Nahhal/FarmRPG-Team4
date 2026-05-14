@@ -62,4 +62,17 @@ public class TimeSystem : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
     }
+    public void SleepToNextDay()
+    {
+        _day++;
+        _hour = 6;
+        _minute = 0;
+        _timer = 0f;
+
+        CurrentSeason = (Season)((_day - 1) / _daysPerSeason % 4);
+
+        OnNewDay?.Invoke();
+
+        _timeChanged = true;
+    }
 }

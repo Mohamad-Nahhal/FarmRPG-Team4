@@ -130561,6 +130561,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveSystem
   _timeSystem: {fileID: 958549948}
+  _playerGold: {fileID: 0}
+  _staminaSystem: {fileID: 0}
+  _inventorySystem: {fileID: 0}
+  _player: {fileID: 0}
 --- !u!1 &992539165
 GameObject:
   m_ObjectHideFlags: 0

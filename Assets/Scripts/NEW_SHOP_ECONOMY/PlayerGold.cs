@@ -41,6 +41,11 @@ public class PlayerGold : MonoBehaviour
         _gold += amount;
         GoldChanged?.Invoke();
     }
+    public void SetGold(int amount)
+{
+    _gold = Mathf.Max(0, amount);
+    GoldChanged?.Invoke();
+}
 }
 
 
