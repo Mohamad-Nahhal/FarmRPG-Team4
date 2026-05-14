@@ -49,18 +49,19 @@ public class InventorySystem : MonoBehaviour
     }
 
     public bool AddItem(FarmItemData item, int amount)
-    {
+    {   
         if (!IsValidItemRequest(item, amount))
         {
             return false;
         }
 
-        int amountRemaining = AddToRange(item, amount, InventoryStartIndex, TotalSlotCount);
+        int amountRemaining = amount;
 
-        if (amountRemaining > 0)
-        {
-            amountRemaining = AddToRange(item, amountRemaining, 0, HotbarSize);
-        }
+        amountRemaining = AddToExistingStacks(item, amountRemaining, 0, TotalSlotCount);
+
+        amountRemaining = AddToEmptySlots(item, amountRemaining, InventoryStartIndex, TotalSlotCount);
+
+        amountRemaining = AddToEmptySlots(item, amountRemaining, 0, HotbarSize);
 
         if (amountRemaining == amount)
         {
@@ -111,7 +112,7 @@ public class InventorySystem : MonoBehaviour
             return true;
         }
 
-        if (slot.Item != item || slot.Quantity >= item.MaxStack)
+        if (!IsSameItem(slot.Item, item) || slot.Quantity >= item.MaxStack)
         {
             return false;
         }
@@ -161,7 +162,7 @@ public class InventorySystem : MonoBehaviour
             return true;
         }
 
-        if (fromSlot.Item == toSlot.Item)
+        if (IsSameItem(fromSlot.Item, toSlot.Item))
         {
             int combinedQuantity = fromSlot.Quantity + toSlot.Quantity;
 
@@ -355,14 +356,13 @@ public class InventorySystem : MonoBehaviour
         return _startingHotbarQuantities[slotIndex];
     }
 
-
     private int AddToRange(FarmItemData item, int amount, int startIndex, int endIndex)
     {
         for (int i = startIndex; i < endIndex; i++)
         {
             InventorySlotData slot = _slots[i];
 
-            if (slot.Item != item || slot.Quantity >= item.MaxStack)
+            if (!IsSameItem(slot.Item, item) || slot.Quantity >= item.MaxStack)
             {
                 continue;
             }
@@ -400,13 +400,61 @@ public class InventorySystem : MonoBehaviour
         return amount;
     }
 
+    private int AddToExistingStacks(FarmItemData item, int amount, int startIndex, int endIndex)
+{
+    for (int i = startIndex; i < endIndex; i++)
+    {
+        InventorySlotData slot = _slots[i];
+
+        if (!IsSameItem(slot.Item, item) || slot.Quantity >= item.MaxStack)
+        {
+            continue;
+        }
+
+        int amountToAdd = Mathf.Min(item.MaxStack - slot.Quantity, amount);
+        slot.Quantity += amountToAdd;
+        amount -= amountToAdd;
+
+        if (amount == 0)
+        {
+            return 0;
+        }
+    }
+
+    return amount;
+}
+
+private int AddToEmptySlots(FarmItemData item, int amount, int startIndex, int endIndex)
+{
+    for (int i = startIndex; i < endIndex; i++)
+    {
+        InventorySlotData slot = _slots[i];
+
+        if (HasItem(slot))
+        {
+            continue;
+        }
+
+        int amountToAdd = Mathf.Min(item.MaxStack, amount);
+        slot.Item = item;
+        slot.Quantity = amountToAdd;
+        amount -= amountToAdd;
+
+        if (amount == 0)
+        {
+            return 0;
+        }
+    }
+
+    return amount;
+} 
     private int RemoveFromRange(FarmItemData item, int amount, int startIndex, int endIndex)
     {
         for (int i = startIndex; i < endIndex; i++)
         {
             InventorySlotData slot = _slots[i];
 
-            if (slot.Item != item)
+            if (!IsSameItem(slot.Item, item))
             {
                 continue;
             }
@@ -459,6 +507,16 @@ public class InventorySystem : MonoBehaviour
     private static bool HasItem(InventorySlotData slot)
     {
         return slot != null && slot.Item != null && slot.Quantity > 0;
+    }
+
+    private static bool IsSameItem(FarmItemData a, FarmItemData b)
+    {
+        if (a == null || b == null)
+        {
+            return false;
+        }
+
+        return a.ItemId == b.ItemId;
     }
 
     private void NotifyInventoryChanged()
