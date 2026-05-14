@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb265b0a26009246a8a9b80697664c5, type: 3}
   m_Name: Wool
   m_EditorClassIdentifier: Assembly-CSharp::FarmItemData
-  ItemId: 
-  ItemName: 
-  Icon: {fileID: 0}
+  ItemId: wool
+  ItemName: Wool
+  Icon: {fileID: 1245582644275803429, guid: 553b9c33350c143a99a4a84da96728e7, type: 3}
   MaxStack: 99

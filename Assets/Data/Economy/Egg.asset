@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb265b0a26009246a8a9b80697664c5, type: 3}
   m_Name: Egg
   m_EditorClassIdentifier: Assembly-CSharp::FarmItemData
-  ItemId: 
-  ItemName: 
-  Icon: {fileID: 0}
+  ItemId: egg
+  ItemName: Egg
+  Icon: {fileID: -4072622106568590741, guid: 477efa61f9ba8b84b921dd7cbac56acc, type: 3}
   MaxStack: 99
